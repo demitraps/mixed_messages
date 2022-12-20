@@ -129,7 +129,7 @@ const majorArcanaTarotCards = [
   },
   {
     name: "Judgement",
-    meaning: "abundance",
+    meaning: "reflection",
     upright: "judgement, rebirth, inner calling, absolution",
     reversed: "self-doubt, inner critic, ignoring the call",
   },
@@ -140,3 +140,13 @@ const majorArcanaTarotCards = [
     reversed: "seeking personal closure, short-cuts, delays",
   },
 ];
+
+// Function to show prediction of Tarot cards for past, present and future
+const tarotPrediction = () => {
+  let prediction = `The card drawn for your past is The World, which means completion. In the upright position, the keywords describing your past are completion, integration, accomplishment, travel.
+  The card drawn for your present is Judgement, which means reflection. In the reversed position, the keywords describing your present are self-doubt, inner critic, ignoring the call.
+  Finally, the card drawn for your future is The Moon. In the reversed position, the keywords describing your future are lies, deceit.`;
+  return prediction;
+};
+
+console.log(tarotPrediction());
