@@ -9,7 +9,7 @@ This app logs a random reading of your past, present and future, using the Major
 
 ### How to use
 
-To run this project, install it locally using node and the file local:
+To run this project, install it locally using node:
 
 `$ cd ../folder`
 
