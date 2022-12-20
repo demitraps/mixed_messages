@@ -20,8 +20,9 @@ const majorArcanaTarotCards = [
   {
     name: "The High Priestess",
     meaning: "intuition",
-    upright: "intuition",
-    reversed: "blocked intuition",
+    upright:
+      "intuition, sacred knowledge, divine feminine and the subconscious mind",
+    reversed: "secrets, disconnected from intuition, withdrawal and silence",
   },
   {
     name: "The Empress",
@@ -38,8 +39,8 @@ const majorArcanaTarotCards = [
   {
     name: "The Hierophant",
     meaning: "teachings",
-    upright: "religion, spirituality, doctrine, teachings",
-    reversed: "dogma",
+    upright: "religion, spirituality, doctrine and teachings",
+    reversed: "personal beliefs, freedom, challenging the status quo",
   },
   {
     name: "The Lovers",
@@ -141,11 +142,56 @@ const majorArcanaTarotCards = [
   },
 ];
 
+// Array of two possible positions for each card
+const possiblePositions = ["upright", "reversed"];
+
+// Function to randomly pick a card index
+const cardIndex = () => {
+  return Math.floor(Math.random() * 22);
+};
+
+// Function to randomly pick card position
+const cardPositionIndex = () => {
+  return Math.floor(Math.random() * 2);
+};
+
+// Function to select cards, adding them in an array where 0 is past, 1 is present, 2 is future
+const cardSelection = () => {
+  const cardsDrawn = [];
+  let pastCardIndex = cardIndex();
+  const pastCard = majorArcanaTarotCards[pastCardIndex];
+  cardsDrawn.push(pastCard);
+  let presentCardIndex = cardIndex();
+  //ensure present card isn't the same with past card
+  while (presentCardIndex === pastCardIndex) {
+    presentCardIndex = cardIndex();
+  }
+  const presentCard = majorArcanaTarotCards[presentCardIndex];
+  cardsDrawn.push(presentCard);
+  let futureCardIndex = cardIndex();
+  //ensure future card isn't the same with past and present card
+  while (
+    futureCardIndex === pastCardIndex ||
+    futureCardIndex === presentCardIndex
+  ) {
+    futureCardIndex = cardIndex();
+  }
+  const futureCard = majorArcanaTarotCards[futureCardIndex];
+  cardsDrawn.push(futureCard);
+  return cardsDrawn;
+};
+
+let drawnCards = cardSelection();
+
 // Function to show prediction of Tarot cards for past, present and future
 const tarotPrediction = () => {
-  let prediction = `The card drawn for your past is The World, which means completion. In the upright position, the keywords describing your past are completion, integration, accomplishment, travel.
-  The card drawn for your present is Judgement, which means reflection. In the reversed position, the keywords describing your present are self-doubt, inner critic, ignoring the call.
-  Finally, the card drawn for your future is The Moon. In the reversed position, the keywords describing your future are lies, deceit.`;
+  let pastPosition = possiblePositions[cardPositionIndex()];
+  let presentPosition = possiblePositions[cardPositionIndex()];
+  let futurePosition = possiblePositions[cardPositionIndex()];
+
+  let prediction = `The card drawn for your past is ${drawnCards[0].name}, which means ${drawnCards[0].meaning}. In the ${pastPosition} position, the keywords describing your past are ${drawnCards[0][pastPosition]}.
+  The card drawn for your present is ${drawnCards[1].name}, which means ${drawnCards[1].meaning}. In the ${presentPosition} position, the keywords describing your present are ${drawnCards[1][presentPosition]}.
+  Finally, the card drawn for your future is ${drawnCards[2].name}, which means ${drawnCards[2].meaning}. In the ${futurePosition} position, the keywords describing your future are ${drawnCards[2][futurePosition]}.`;
   return prediction;
 };
 
